@@ -124,11 +124,13 @@ let player2 = {
 let turn = 0;
 let p1selected = false;
 let p2selected = false;
+let battleSequence = false;
 
 function checkPokemon(){
   if ((player1.pokemonChoice != undefined) && (player2.pokemonChoice != undefined)){
     console.log("pokemon Selected")
     $(".pokeSelectButtons").hide();
+    battleSequence = true;
   }
 }
 
@@ -189,10 +191,10 @@ $("#charSelect").click(function(){
 
 
   
-  
-
- 
-
+  // create two buttons for each pokemon 
+  if (battleSequence == true){
+    createMoveButtons();
+  }
 
   // attack sequence
   function runAttack(){
@@ -209,4 +211,8 @@ $("#charSelect").click(function(){
   
 
 
-
+function createMoveButtons(){
+  for (i = 0; i < player1.pokemonChoice.move.length; i++){
+    $("button").appendTo("#player1");
+  }
+}
