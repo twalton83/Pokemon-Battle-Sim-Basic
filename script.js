@@ -5,14 +5,7 @@ Need to set up turns so next we can switch until pokemon is dead.
 Upon picking, each pokemon needs to show up, buttons need to be deleted
 then buttons for moves need to be added*/
 
-let player1 = {
-  pokemonChoice : undefined
 
-}
-let player2 = {
-  pokemonChoice : undefined
-  
-}
 
 
 
@@ -57,16 +50,38 @@ function Type(name, weakness, strength){
   //creating the pokemon 
   let Charmander = new Pokemon("Charmander", fireType, [Tackle, Ember], 20);
   let Bulbasaur = new Pokemon("Bulbasaur", grassType, [Scratch, vineWhip], 20);
-  
+  let Squirtle = new Pokemon("Squirtle", waterType, [Tackle], 20);
  
+  const charImg = document.createElement("IMG");
+  charImg.alt = "Picture of Charmander";
+  charImg.setAttribute('class', 'photo');
+  charImg.src="sprites/charmander-active.png";
+  charImg.style.width = "200px";
+  charImg.style.height = "200px"
+ 
+  const bulbaImg = document.createElement("IMG");
+  bulbaImg.alt = "Picture of Bulbasaur";
+  bulbaImg.setAttribute('class', 'photo');
+  bulbaImg.src="sprites/bulbasaurr-static-2.png";
+  bulbaImg.style.width = "200px";
+  bulbaImg.style.height = "200px"
+ 
+  const squirtImg = document.createElement("IMG");
+  squirtImg.alt = "Picture of Squirtle";
+  squirtImg.setAttribute('class', 'photo');
+  squirtImg.src="sprites/squirtle-active-2.png";
+  squirtImg.style.width = "200px";
+  squirtImg.style.height = "200px"
+  
+
+  
   function player1turn(){
     if(turn === 0){
       turn += 1;
-      alert("player 2 next");
       console.log(turn);
       //checkForWinner();
     } else if (turn === 1){
-      alert("player 2 turn");
+      console.log("player 2 turn");
       
   }
   }
@@ -95,18 +110,43 @@ function Type(name, weakness, strength){
          
     }
   }
-*/let turn = 0;
+*/
+
+let player1 = {
+  pokemonChoice : undefined
+
+};
+let player2 = {
+  pokemonChoice : undefined
+  
+};
+
+let turn = 0;
+let p1selected = false;
+let p2selected = false;
+
+function checkPokemon(){
+  if ((player1.pokemonChoice != undefined) && (player2.pokemonChoice != undefined)){
+    console.log("pokemon Selected")
+    $(".pokeSelectButtons").hide();
+  }
+}
+
 
 $("#charSelect").click(function(){
   if (turn === 0){
-    player1turn()
     player1.pokemonChoice = Charmander;
     $("#player1").html(charImg);
+    p1selected === true;
+    turn = 1;
+    checkPokemon()
     ;
   } else if (turn === 1){
     player2.pokemonChoice = Charmander;
     $("#player2").html(charImg);
-    player2turn();
+    p2selected === true;
+    turn = 0;
+    checkPokemon()
   }
 
 })
@@ -114,60 +154,44 @@ $("#charSelect").click(function(){
   $("#bulbaSelect").click(function(){
   
     if (turn === 0){
-      player1turn();
       player1.pokemonChoice = Bulbasaur;
       $("#player1").html(bulbaImg);
+      p1selected = true;
+      turn = 1;
+      checkPokemon()
     } else if (turn === 1){
-      player2turn()
       player2.pokemonChoice = Bulbasaur;
       $("#player2").html(bulbaImg);
+      p2selected = true;
+      turn = 0;
+      checkPokemon()
     }
 
   })
 
   $("#squirtSelect").click(function(){
      if (turn = 0){
-      player1turn();
       player1.pokemonChoice = Squirtle;
       $("#player1").html(squirtImg);
+      p1selected = true;
+      turn = 1;
+      checkPokemon();
     } else if (turn = 1){
-      player2turn();
       player2.pokemonChoice = Squirtle
       $("#player2").html(squirtImg);
+      p2selected = true;
+      turn = 0;
+      checkPokemon();
     }
   })
 
-
-
-
-  /* create turns, and set the pokemon into each players
-  "profile" */ 
-  
-  
-
-  const charImg = document.createElement("IMG");
-  charImg.alt = "Picture of Charmander";
-  charImg.setAttribute('class', 'photo');
-  charImg.src="sprites/charmander-active.png";
-  charImg.style.width = "200px";
-  charImg.style.height = "200px"
  
-  const bulbaImg = document.createElement("IMG");
-  bulbaImg.alt = "Picture of Bulbasaur";
-  bulbaImg.setAttribute('class', 'photo');
-  bulbaImg.src="sprites/bulbasaurr-static-2.png";
-  bulbaImg.style.width = "200px";
-  bulbaImg.style.height = "200px"
- 
-  const squirtImg = document.createElement("IMG");
-  squirtImg.alt = "Picture of Squirtle";
-  squirtImg.setAttribute('class', 'photo');
-  squirtImg.src="sprites/squirtle-active-2.png";
-  squirtImg.style.width = "200px";
-  squirtImg.style.height = "200px"
-  
+
 
   
+  
+
+ 
 
 
   // attack sequence
