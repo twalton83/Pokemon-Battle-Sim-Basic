@@ -73,7 +73,6 @@ const bulbasaurImg = {
 }
 
 
-
 let turn = 0;
 
 function checkTurn(){
@@ -97,114 +96,6 @@ let p2selected = false;
 let battleSequence = false;
 
 
-function checkPokemon(){
-if ((player1.pokemonChoice != undefined) && (player2.pokemonChoice != undefined)){
-  console.log("pokemon Selected")
-  $(".pokeSelectButtons").hide();
-  $("#queryDisplay").hide();
-  battleSequence = true;
-  moveSetup();
-}
-};
-
-$("#charSelect").click(function(){
-if (turn === 0){
- 
-  player1.pokemonChoice = Charmander;
-  $("#player1").html(charImg);
-  p1selected === true;
-   checkTurn();
-} else {
-  
-  player2.pokemonChoice = Charmander;
-  $("#player2").html(charImg);
-  p2selected === true;
-  checkPokemon()
-  checkTurn();
- 
-}
-
-});
-
-$("#bulbaSelect").click(function(){
-
-  if (turn === 0){
-    player1.pokemonChoice = Bulbasaur;
-    $("#player1").html(bulbaImg);
-    p1selected = true;
-    checkTurn();
-  }else {
-    
-    player2.pokemonChoice = Bulbasaur;
-    $("#player2").html(bulbaImg);
-    p2selected = true;
-    checkPokemon();
-    checkTurn();
-    
-  }
-
-});
-
-$("#squirtSelect").click(function(){
-   if (turn === 0){
-    player1.pokemonChoice = Squirtle;
-    $("#player1").html(squirtImg);
-    p1selected = true;
-    checkTurn();
-  } else {
-    player2.pokemonChoice = Squirtle
-    $("#player2").html(squirtImg);
-    p2selected = true;
-    checkPokemon();
-    checkTurn();
-  }
-});
-
-function moveSetup(){
-if (battlesequence = true){
-  for (i = 0; i < player1.pokemonChoice.Move.length; i++)
-  $("<button>" + player1.pokemonChoice.Move[i].name + "</button>").addClass("moveButtons").attr('id', player1.pokemonChoice.Move[i].name).appendTo("#player1");
-  
-  ;
-  
-  for (i = 0; i < player2.pokemonChoice.Move.length; i++)
-  $("<button>" + player2.pokemonChoice.Move[i].name + "</button>").addClass("moveButtons").attr('id', player2.pokemonChoice.Move[i].name).appendTo("#player2");
-}
-};
 
 
-
-function runAttacks(player1Move, player2Move){
-  if (player1Move.strength = player2Move.strength){
-    console.log("this did double damage!")
-    p1Attack === null && p2Attack === null
-  } else {
-    console.log("normal damage")
-    p1Attack === null && p2Attack === null
-  } 
-}
-
-let attacks = {
-  p1Attack: undefined,
-  p2Attack: undefined
-  }
-
-// make this some kind of loop 
-
-$("#player1").on("click", "#Tackle", function(){
-p1Attack = Tackle
-
-});
-
-$("#player1").on("click", "#Ember", function() {
-p1Attack = Ember
-});
-
-$("#player2").on("click", "#Scratch", function() {
-p2Attack = Scratch
-});
-
-$("#player2").on("click", "#Vine Whip", function() {
-p2Attack = vineWhip
-});
 
