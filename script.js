@@ -1,9 +1,4 @@
-/* Practicing using objects */ 
 
-/* When player picks, it then lets the second player pick.
-Need to set up turns so next we can switch until pokemon is dead.
-Upon picking, each pokemon needs to show up, buttons need to be deleted
-then buttons for moves need to be added*/
 
 //setting up Type objects
 function Type(name, weakness, strength){
@@ -51,27 +46,31 @@ let Charmander = new Pokemon("Charmander", fireType, [Tackle, Ember], 20);
 let Bulbasaur = new Pokemon("Bulbasaur", grassType, [Scratch, vineWhip], 20);
 let Squirtle = new Pokemon("Squirtle", waterType, [Tackle, waterGun], 20);
 
-const charImg = document.createElement("IMG");
-charImg.alt = "Picture of Charmander";
-charImg.setAttribute('class', 'photo');
-charImg.src= "sprites/charmander-active.png";
-charImg.style.width = "200px";
-charImg.style.height = "200px";
 
-const bulbaImg = document.createElement("IMG");
-bulbaImg.alt = "Picture of Bulbasaur";
-bulbaImg.setAttribute('class', 'photo');
-bulbaImg.src= "sprites/bulbasaur-active.gif";
-bulbaImg.style.width = "200px";
-bulbaImg.style.height = "200px";
+const charizardImg = {
+  alt : "Picture of Charmander",
+  classList : "photo",
+  src:  "sprites/charmander-active.png", 
+  width : "200px", 
+  height : "200px",
+}
 
-const squirtImg = document.createElement("IMG");
-squirtImg.alt = "Picture of Squirtle";
-squirtImg.setAttribute('class', 'photo');
-squirtImg.src= null;
-squirtImg.style.width = "200px";
-squirtImg.style.height = "200px";
+const squirtleImg = {
+  alt : "Picture of Squirtle",
+  classList : "photo",
+  src:  "sprites/squirtle-active-2.png", 
+  width : "200px", 
+  height : "200px",
+}
 
+
+const bulbasaurImg = {
+  alt : "Picture of Bulbasaur",
+  classList : "photo",
+  src:  "sprites/bulbasaur-active.png", 
+  width : "200px", 
+  height : "200px",
+}
 
 
 
@@ -87,10 +86,10 @@ if (turn === 0){
 }
 
 let player1 = {
-pokemonChoice : undefined
+pokemonChoice : undefined,
 };
 let player2 = {
-pokemonChoice : undefined
+pokemonChoice : undefined,
 };
 
 let p1selected = false;
@@ -173,35 +172,39 @@ if (battlesequence = true){
 }
 };
 
-let attacks = {
-p1Attack: undefined,
-p2Attack: undefined
+
+
+function runAttacks(player1Move, player2Move){
+  if (player1Move.strength = player2Move.strength){
+    console.log("this did double damage!")
+    p1Attack === null && p2Attack === null
+  } else {
+    console.log("normal damage")
+    p1Attack === null && p2Attack === null
+  } 
 }
 
-function runAttacks(){
-console.log(p1Attack);
-console.log(p2Attack);
-}
+let attacks = {
+  p1Attack: undefined,
+  p2Attack: undefined
+  }
 
 // make this some kind of loop 
 
-$("#player1").on("click", "#Tackle", function() {
-p1Attack = player1.pokemonChoice.Move[0];
+$("#player1").on("click", "#Tackle", function(){
+p1Attack = Tackle
 
 });
 
 $("#player1").on("click", "#Ember", function() {
-p1Attack = player1.pokemonChoice.Move[1];
-runAttacks();
+p1Attack = Ember
 });
 
 $("#player2").on("click", "#Scratch", function() {
-p2Attack = player2.pokemonChoice.Move[0];
-runAttacks();
+p2Attack = Scratch
 });
 
 $("#player2").on("click", "#Vine Whip", function() {
-p2Attack = player2.pokemonChoice.Move[1];
-runAttacks();
+p2Attack = vineWhip
 });
 

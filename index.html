@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <script src= "https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <link rel="stylesheet" href="style.css">
   <title>Pokémon Battle!</title>
 </head>
@@ -14,33 +13,33 @@
  <header>
     Pokemon Starter Battle
     </header>
-    <h1 id= "queryDisplay">
+    <h1 class= "queryDisplay">
             What pokemon do you choose? 
         </h1>
-        <div id = pokeSelectButtons>
-            <button class = "pokeSelectButtons" id="charSelect">
+        <div class = pokeSelectButtons>
+            <button class = "pokeSelectButtons charSelect">
                 Charmander
             </button>
-            <button class = "pokeSelectButtons" id="bulbaSelect"> 
+            <button class = "pokeSelectButtons bulbaSelect"> 
                 Bulbasaur
             </button>
-            <button class = "pokeSelectButtons" id="squirtSelect">
+            <button class = "pokeSelectButtons squirtSelect">
                 Squirtle
             </button>
          </div>
-    <section id= "display">
+    <section class= "battleDisplay">
       
-        <div class= "playerDisplays" id= "player1">
-            <p id = "player1Pokemon"> 
+        <div class= "playerDisplays player1">
+            <p class = "player1Pokemon"> 
             </p>
-            <p id= "p1PokeHP">
+            <p class= "pokeHp player1">
 
             </p>
         </div>
-        <div class = "playerDisplays" id="player2">
-            <p id = "player2Pokemon"> 
+        <div class = "playerDisplays player2">
+            <p class = "player2Pokemon"> 
             </p>
-            <p id= "p1PokeHP">
+            <p class= "pokeHP player2">
 
             </p>
         </div>
