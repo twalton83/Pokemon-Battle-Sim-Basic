@@ -49,31 +49,27 @@ class Pokemon{
 
 }
 
-//creating the pokemon 
 let Charmander = new Pokemon("Charmander", fireType, [Tackle, Ember], 20, 
 {
   alt : "Picture of Charmander",
-  classList : "photo",
+  classList : "sprite",
   src:  "sprites/charmander-active.png", 
-  width : "200px", 
-  height : "200px",
+  '.style.width' : "200px", 
+  '.style.height' : "200px"
 });
 
 let Bulbasaur = new Pokemon("Bulbasaur", grassType, [Scratch, vineWhip], 20, 
 {
   alt : "Picture of Bulbasaur",
-  classList : "photo",
+  classList : "sprite",
   src:  "sprites/bulbasaur-active.gif", 
-  width : "100px", 
-  height : "100px",
 });
+
 let Squirtle = new Pokemon("Squirtle", waterType, [Tackle, waterGun], 20, 
 {
   alt : "Picture of Squirtle",
-  classList : "photo",
+  classList : "sprite",
   src:  "sprites/squirtle-active-2.png", 
-  width : "200px", 
-  height : "200px",
 });
 
 
@@ -126,16 +122,11 @@ function loadPokemon(player){
   console.log(playerDisplay)
   playerDisplay.style.display = "block";
   const img = document.createElement('img');
-  img.src = player.pokemonChoice['img'].src;
-  img.style.height = player.pokemonChoice['img'].height;
-  img.alt = player.pokemonChoice['img'].alt;
-  img.style.width = player.pokemonChoice['img'].width;
-  img.style.classList = player.pokemonChoice['img'].classList
-  
-
-  console.log(img)
-  playerDisplay.appendChild(img); //this is causing child elements to delete
-
+  const imgData = player.pokemonChoice['img']; 
+  for (const attribute in imgData){
+    img[attribute] = imgData[attribute]
+  }
+  playerDisplay.appendChild(img);
   }
 
 

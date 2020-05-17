@@ -55,3 +55,8 @@ height: 40px;
 .playerDisplays{
 display: none;
 }
+
+.sprite{
+  height: 200px;
+  width: 200px;
+}
