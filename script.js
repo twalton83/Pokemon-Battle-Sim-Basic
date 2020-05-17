@@ -63,9 +63,9 @@ let Bulbasaur = new Pokemon("Bulbasaur", grassType, [Scratch, vineWhip], 20,
 {
   alt : "Picture of Bulbasaur",
   classList : "photo",
-  src:  "sprites/bulbasaur-active.png", 
-  width : "200px", 
-  height : "200px",
+  src:  "sprites/bulbasaur-active.gif", 
+  width : "100px", 
+  height : "100px",
 });
 let Squirtle = new Pokemon("Squirtle", waterType, [Tackle, waterGun], 20, 
 {
@@ -127,6 +127,12 @@ function loadPokemon(player){
   playerDisplay.style.display = "block";
   const img = document.createElement('img');
   img.src = player.pokemonChoice['img'].src;
+  img.style.height = player.pokemonChoice['img'].height;
+  img.alt = player.pokemonChoice['img'].alt;
+  img.style.width = player.pokemonChoice['img'].width;
+  img.style.classList = player.pokemonChoice['img'].classList
+  
+
   console.log(img)
   playerDisplay.appendChild(img); //this is causing child elements to delete
 
