@@ -1,4 +1,10 @@
+const charSelect = document.querySelector('.charSelect')
+const bulbaSelect = document.querySelector('.bulbaSelect')
+const squirtSelect = document.querySelector('.squirtSelect')
+const pokeChoiceButtons = document.querySelectorAll('.pokeButtons')
 
+const battleUI = document.querySelector('.battleDisplay');
+battleUI.style.display = "none";
 
 class Types {
   constructor(name, strength, weakness){
@@ -14,7 +20,6 @@ const grassType = new Types("Grass", "Water",  "Fire")
 const normalType = new Types("Normal")
 
 
-//establishing move object
 class Move{
   constructor(name, type, power){
     this.name = name;
@@ -23,7 +28,7 @@ class Move{
   }
 }
   
-//setting up moves
+
 const Tackle = new Move("Tackle", normalType, 2);
 const Ember = new Move("Ember", fireType, 3);
 const Scratch = new Move("Scratch", normalType, 2);
@@ -73,23 +78,33 @@ const bulbasaurImg = {
 }
 
 
-let turn = 0;
-
-function checkTurn(){
-  if (turn === 0){
-    turn += 1;
-  } else if (turn === 1) {
-    turn -= 1
-  }
-}
 
 let player1 = {
 pokemonChoice : undefined,
+turn : true
 };
 let player2 = {
 pokemonChoice : undefined,
+turn : false
 };
 
+function checkTurn(){
+  return player1.turn ? false : true
+ }
+
+function pickPokemon(e){
+  if(player1.turn){
+    player1.pokemonChoice = eval(e.target.value);
+    console.log(player1.pokemonChoice)
+  } else if (!player1.turn){
+    player2.pokemonChoice = eval(e.target.value);
+    console.log(player2.pokemonChoice)
+  }
+}
+
+pokeChoiceButtons.forEach((button) =>{
+  button.addEventListener('click', pickPokemon)
+})
 
 
 
