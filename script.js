@@ -78,10 +78,12 @@ let Squirtle = new Pokemon("Squirtle", waterType, [Tackle, waterGun], 20,
 
 
 let player1 = {
+name: "player1",
 pokemonChoice : undefined,
 turn : true
 };
 let player2 = {
+name : 'player2',
 pokemonChoice : undefined,
 turn : false
 };
@@ -120,7 +122,7 @@ pokeChoiceButtons.forEach((button) =>{
 function loadPokemon(player){
   battleUI.style.display = "block";
   selectButtonsDisplay.remove();
-  const playerDisplay = document.querySelector(`.playerDisplays.${player}`)
+  const playerDisplay = document.querySelector(`.playerDisplays.` + player.name)
   console.log(playerDisplay)
   playerDisplay.style.display = "block";
   const img = document.createElement('img');
