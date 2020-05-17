@@ -6,9 +6,13 @@ body {
   font-family: 'Press Start 2P', cursive;
 }
 header{
-margin-top: 20px;
+margin-top: 20vh;
 }
-#queryDisplay{
+
+.battleDisplay {
+  display: flex;
+}
+.queryDisplay{
 font-size: 16px;
 font-weight: 400;
 margin: 20px;
@@ -16,17 +20,14 @@ margin: 20px;
 .playerDisplays{
   width: 300px;
   height: 300px;
-
   margin: 10px;
-  display: flex;
+  display: inherit;
   align-items: center;
   justify-content:center;
   flex-direction: column;
+
 }
-#display {
-  display: flex;
-  flex-direction: row;
-}
+
 
 .moveButtons{
 margin: 10px;
@@ -45,8 +46,12 @@ transform: scale(1.1);
 margin-top: 50px;
 }
 
-.pokeSelectButtons {
+.pokeButtons {
 width: 100px;
 height: 40px;
 
+}
+
+.playerDisplays{
+display: none;
 }

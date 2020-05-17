@@ -2,9 +2,11 @@ const charSelect = document.querySelector('.charSelect')
 const bulbaSelect = document.querySelector('.bulbaSelect')
 const squirtSelect = document.querySelector('.squirtSelect')
 const pokeChoiceButtons = document.querySelectorAll('.pokeButtons')
-
+const selectButtonsDisplay = document.querySelector('.pokeSelectButtons')
+const playerUIDisplays = document.querySelectorAll('.playerDisplays')
 const battleUI = document.querySelector('.battleDisplay');
 battleUI.style.display = "none";
+
 
 class Types {
   constructor(name, strength, weakness){
@@ -37,46 +39,42 @@ const waterGun = new Move("Water Gun", waterType, 3)
 
 
 class Pokemon{
-  constructor(name, Type, Move, HP){
+  constructor(name, Type, Move, HP, img){
     this.name = name;
     this.Type = Type;
     this.Move = Move;
     this.HP = HP;
+    this.img = img
   }
 
 }
 
 //creating the pokemon 
-let Charmander = new Pokemon("Charmander", fireType, [Tackle, Ember], 20);
-let Bulbasaur = new Pokemon("Bulbasaur", grassType, [Scratch, vineWhip], 20);
-let Squirtle = new Pokemon("Squirtle", waterType, [Tackle, waterGun], 20);
-
-
-const charizardImg = {
+let Charmander = new Pokemon("Charmander", fireType, [Tackle, Ember], 20, 
+{
   alt : "Picture of Charmander",
   classList : "photo",
   src:  "sprites/charmander-active.png", 
   width : "200px", 
   height : "200px",
-}
+});
 
-const squirtleImg = {
-  alt : "Picture of Squirtle",
-  classList : "photo",
-  src:  "sprites/squirtle-active-2.png", 
-  width : "200px", 
-  height : "200px",
-}
-
-
-const bulbasaurImg = {
+let Bulbasaur = new Pokemon("Bulbasaur", grassType, [Scratch, vineWhip], 20, 
+{
   alt : "Picture of Bulbasaur",
   classList : "photo",
   src:  "sprites/bulbasaur-active.png", 
   width : "200px", 
   height : "200px",
-}
-
+});
+let Squirtle = new Pokemon("Squirtle", waterType, [Tackle, waterGun], 20, 
+{
+  alt : "Picture of Squirtle",
+  classList : "photo",
+  src:  "sprites/squirtle-active-2.png", 
+  width : "200px", 
+  height : "200px",
+});
 
 
 let player1 = {
@@ -88,23 +86,49 @@ pokemonChoice : undefined,
 turn : false
 };
 
-function checkTurn(){
-  return player1.turn ? false : true
+const checkTurn = () =>{
+  if (player1.turn){
+    player1.turn = false;
+    player2.turn = true;
+  } else {
+    player2.turn = false;
+    player1.turn = true
+  }
  }
 
-function pickPokemon(e){
+const pickPokemon = (e) => {
   if(player1.turn){
     player1.pokemonChoice = eval(e.target.value);
     console.log(player1.pokemonChoice)
+    checkTurn()
   } else if (!player1.turn){
     player2.pokemonChoice = eval(e.target.value);
+    checkTurn()
     console.log(player2.pokemonChoice)
+  }
+  if (player1.pokemonChoice && player2.pokemonChoice){
+    loadPokemon(player1)
+    loadPokemon(player2);
   }
 }
 
 pokeChoiceButtons.forEach((button) =>{
   button.addEventListener('click', pickPokemon)
-})
+});
+
+
+function loadPokemon(player){
+  battleUI.style.display = "block";
+  selectButtonsDisplay.remove();
+  const playerDisplay = document.querySelector(`.playerDisplays.${player}`)
+  console.log(playerDisplay)
+  playerDisplay.style.display = "block";
+  const img = document.createElement('img');
+  img.src = player.pokemonChoice['img'].src;
+  console.log(img)
+  playerDisplay.appendChild(img); //this is causing child elements to delete
+
+  }
 
 
 
