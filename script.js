@@ -97,12 +97,10 @@ const checkTurn = () =>{
 const pickPokemon = (e) => {
   if(player1.turn){
     player1.pokemonChoice = eval(e.target.value);
-    console.log(player1.pokemonChoice)
     checkTurn()
   } else if (!player1.turn){
     player2.pokemonChoice = eval(e.target.value);
     checkTurn()
-    console.log(player2.pokemonChoice)
   }
   if (player1.pokemonChoice && player2.pokemonChoice){
     loadPokemon(player1)
@@ -115,21 +113,43 @@ pokeChoiceButtons.forEach((button) =>{
 });
 
 
-function loadPokemon(player){
+const loadPokemon = (player) => {
   battleUI.style.display = "block";
   selectButtonsDisplay.remove();
   const playerDisplay = document.querySelector(`.playerDisplays.` + player.name)
-  console.log(playerDisplay)
-  playerDisplay.style.display = "block";
+  playerDisplay.style.display = "flex";
+  loadImages(player)
+  createMoveButtons(player)
+}
+
+const loadImages = (player) => {
+
+  // not DRY, fix this later
+  const playerDisplay = document.querySelector(`.playerDisplays.` + player.name)
   const img = document.createElement('img');
   const imgData = player.pokemonChoice['img']; 
   for (const attribute in imgData){
     img[attribute] = imgData[attribute]
   }
   playerDisplay.appendChild(img);
-  }
+}
 
 
+
+const createMoveButtons = (player) => {
+  const playerDisplay = document.querySelector(`.playerDisplays.` + player.name);
+  const moves = player.pokemonChoice.Move;
+  console.log(moves);
+
+  moves.forEach((move) =>{
+    const button = document.createElement('button');
+    button.value = move.name
+    button.textContent = move.name
+    console.log(button)
+    playerDisplay.appendChild(button)
+  });
+
+}
 
 
 
