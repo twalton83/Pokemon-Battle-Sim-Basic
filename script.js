@@ -5,8 +5,9 @@ const pokeChoiceButtons = document.querySelectorAll('.pokeButtons')
 const selectButtonsDisplay = document.querySelector('.pokeSelectButtons')
 const playerUIDisplays = document.querySelectorAll('.playerDisplays')
 const battleUI = document.querySelector('.battleDisplay');
-battleUI.style.display = "none";
+const queryDisplay = document.querySelector('.queryDisplay')
 
+battleUI.style.display = "none";
 
 class Types {
   constructor(name, strength, weakness){
@@ -19,7 +20,7 @@ class Types {
 const fireType = new Types("Fire", "Grass", "Water")
 const waterType = new Types("Water", "Fire", "Grass")
 const grassType = new Types("Grass", "Water",  "Fire")
-const normalType = new Types("Normal")
+const normalType = new Types("Normal", "None", "None")
 
 
 class Move{
@@ -116,8 +117,10 @@ pokeChoiceButtons.forEach((button) =>{
 
 
 const loadPokemon = (player) => {
-  battleUI.style.display = "block";
+  battleUI.style.display = "flex";
   selectButtonsDisplay.remove();
+  queryDisplay.style.display = "none"
+
   const playerDisplay = document.querySelector(`.playerDisplays.` + player.name)
   playerDisplay.style.display = "flex";
   loadImages(player)
@@ -163,41 +166,47 @@ const createMoveButtons = (player) => {
 const battleSet = (e) => {
   if(player1.moveLoaded && player2.moveLoaded) return;
   if (player1.turn === true){
-    player1.moveLoaded = e.target.value
+    player1.moveLoaded = e.target.value;
     console.log(` Player 1 chose: ${player1.moveLoaded}`)
+    loadMoveObjects(player1)
     checkTurn()
   }
   else if (player2.turn === true){
     player2.moveLoaded = e.target.value;
     console.log(` Player 2 chose: ${player2.moveLoaded}`)
+      
+    loadMoveObjects(player2)
     checkTurn()
   }
   if (player1.moveLoaded && player2.moveLoaded){
     console.log('Both moves loaded.')
     //battleExecution()
-    loadMoveObjects(player1)
-    loadMoveObjects(player2)
+
+    battleExecution()
   }
 }
 
 const loadMoveObjects = (player) => {
-
   const pokemonMoveSet = player.pokemonChoice.moves;
-
-  const selectedMove = pokemonMoveSet.filter(move => move.name === player.moveLoaded)
-   //need to use value to loop through moves, check for name equating to move
-  //then use the value of the moves to battle against one another 
-  console.log(selectedMove)
-  return selectedMove
+  const selectedMove = pokemonMoveSet.filter(move => {
+    if (move.name === player.moveLoaded){
+      player.moveLoaded = move
+    }
+  })
+  console.log(player.moveLoaded)
 }
 
+
+// split into type checking function, pass in moves and weaknesses 
 const battleExecution = () =>{
- 
-  //  change eval later to a safer method. 
-  // eval does not work with spaces in the name
-  
-
+ if(player1.moveLoaded.type.weakness === player2.pokemonChoice.type.name){
+   player1.move.strength *= .5
+ } else if (player1.moveLoaded.type.strength === player2.pokemonChoice.type.weakness){
+  player1.move.strength *= 2
+ } 
 }
+
+
 
 
 const gifToPngSprites = () =>{}
