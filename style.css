@@ -17,7 +17,6 @@ box-shadow: 0px 9px 10px -5px rgba(0,0,0,0.75);
 }
 
 
-
 .battleDisplay {
   display: flex;
   flex-direction: row;
@@ -41,12 +40,7 @@ margin: 20px;
 
 
 .moveButtons{
-margin: 10px;
-width: 80px;
-height: 40px;
-border-radius: 5px;
-border: none
-
+margin: .5rem;
 }
 
 .moveButtons:hover{
@@ -60,7 +54,6 @@ margin-top: 50px;
 .pokeButtons {
 width: 100px;
 height: 40px;
-
 }
 
 .playerDisplays{
@@ -72,13 +65,15 @@ display: none;
   width: 200px;
 }
 
-
-.pokeButtons{
-  border: none;
+button {
+  font-family: 'Press Start 2P', cursive;
   border-radius: 5px;
   width: auto;
-  font-family: 'Press Start 2P', cursive;
+  border-bottom:  2.5px solid black;
+  font-size: .55rem
 }
+
+
 .charSelect{
   background-color: #edccaf
 }
@@ -93,12 +88,37 @@ display: none;
 @media only screen and (max-width: 600px) {
   body{
     display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    height: 100vh;
+    top: 0;
+    bottom: 0;
+  }
+  header{
+    text-align: center
   }
   header h1{
     font-size: 1.5rem;
-    
+   
   }
-  .queryDisplay{
-    
+  .battleDisplay{
+
+    top: 30%;
+    position: absolute
+  }
+  .playerDisplays{
+    height: auto;
+    width: 50vw
+  }
+
+  button {
+    width: auto;
+  }
+
+  .moveButtons{
+    font-size: 1rem;
+    height: 3rem;
+    width: auto;
+
   }
 }

@@ -1,3 +1,15 @@
+// To Do's
+
+/*  - add type colors to move buttons
+    - change header to say who's turn it is
+    - option to play 2p versus computer 
+    - change sprites from active to inactive 
+    - finish battle logic 
+    - clean up redundant code
+    - allow players to only pick moves from their own moveset
+    */
+
+
 const charSelect = document.querySelector('.charSelect')
 const bulbaSelect = document.querySelector('.bulbaSelect')
 const squirtSelect = document.querySelector('.squirtSelect')
@@ -55,8 +67,7 @@ let Charmander = new Pokemon("Charmander", fireType, [Tackle, Ember], 20,
   alt : "Picture of Charmander",
   classList : "sprite",
   src:  "sprites/charmander-active.png", 
-  '.style.width' : "200px", 
-  '.style.height' : "200px"
+
 });
 
 let Bulbasaur = new Pokemon("Bulbasaur", grassType, [Scratch, vineWhip], 20, 
@@ -64,6 +75,7 @@ let Bulbasaur = new Pokemon("Bulbasaur", grassType, [Scratch, vineWhip], 20,
   alt : "Picture of Bulbasaur",
   classList : "sprite",
   src:  "sprites/bulbasaur-active.gif", 
+
 });
 
 let Squirtle = new Pokemon("Squirtle", waterType, [Tackle, waterGun], 20, 
@@ -91,36 +103,39 @@ const checkTurn = () =>{
   if (player1.turn){
     player1.turn = false;
     player2.turn = true;
+    queryDisplay.textContent = "Player 2, make your selection."
   } else {
     player2.turn = false;
     player1.turn = true
+    queryDisplay.textContent = "Player 1, make your selection."
   }
  }
 
 const pickPokemon = (e) => {
   if(player1.turn){
     player1.pokemonChoice = eval(e.target.value);
+    loadPokemon(player1)
     checkTurn()
   } else if (!player1.turn){
     player2.pokemonChoice = eval(e.target.value);
+    loadPokemon(player2);
     checkTurn()
   }
   if (player1.pokemonChoice && player2.pokemonChoice){
-    loadPokemon(player1)
-    loadPokemon(player2);
+    selectButtonsDisplay.remove();
+    // add logic to set "Player X, make your selection."
+    //queryDisplay.textContent = ""
   }
 }
+
+
 
 pokeChoiceButtons.forEach((button) =>{
   button.addEventListener('click', pickPokemon)
 });
 
-
 const loadPokemon = (player) => {
   battleUI.style.display = "flex";
-  selectButtonsDisplay.remove();
-  queryDisplay.style.display = "none"
-
   const playerDisplay = document.querySelector(`.playerDisplays.` + player.name)
   playerDisplay.style.display = "flex";
   loadImages(player)
@@ -128,7 +143,6 @@ const loadPokemon = (player) => {
 }
 
 const loadImages = (player) => {
-
   // not DRY, fix this later
   const playerDisplay = document.querySelector(`.playerDisplays.` + player.name)
   const img = document.createElement('img');
@@ -139,31 +153,21 @@ const loadImages = (player) => {
   playerDisplay.appendChild(img);
 }
 
-
-
 const createMoveButtons = (player) => {
   const playerDisplay = document.querySelector(`.playerDisplays.` + player.name);
   const moves = player.pokemonChoice.moves;
-  console.log(moves);
-
   moves.forEach((move) =>{
     const button = document.createElement('button');
     button.value = move.name
     button.textContent = move.name;
     button.classList = "moveButtons"
     button.addEventListener('mousedown', battleSet)
-    console.log(button)
     playerDisplay.appendChild(button)
   });
-
 }
 
-// Need to add click listener that changes moveLoaded to true
-
-// Need to target move buttons in each player's area
-// Then need to apply the correct values to the moves
-
 const battleSet = (e) => {
+  
   if(player1.moveLoaded && player2.moveLoaded) return;
   if (player1.turn === true){
     player1.moveLoaded = e.target.value;
@@ -174,14 +178,11 @@ const battleSet = (e) => {
   else if (player2.turn === true){
     player2.moveLoaded = e.target.value;
     console.log(` Player 2 chose: ${player2.moveLoaded}`)
-      
     loadMoveObjects(player2)
     checkTurn()
   }
   if (player1.moveLoaded && player2.moveLoaded){
     console.log('Both moves loaded.')
-    //battleExecution()
-
     battleExecution()
   }
 }
@@ -210,3 +211,4 @@ const battleExecution = () =>{
 
 
 const gifToPngSprites = () =>{}
+
