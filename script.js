@@ -39,10 +39,10 @@ const waterGun = new Move("Water Gun", waterType, 3)
 
 
 class Pokemon{
-  constructor(name, Type, Move, HP, img){
+  constructor(name, type, moves, HP, img){
     this.name = name;
-    this.Type = Type;
-    this.Move = Move;
+    this.type = type;
+    this.moves = moves;
     this.HP = HP;
     this.img = img
   }
@@ -76,12 +76,14 @@ let Squirtle = new Pokemon("Squirtle", waterType, [Tackle, waterGun], 20,
 let player1 = {
 name: "player1",
 pokemonChoice : undefined,
-turn : true
+turn : true,
+moveLoaded: undefined
 };
 let player2 = {
 name : 'player2',
 pokemonChoice : undefined,
-turn : false
+turn : false,
+moveLoaded : undefined
 };
 
 const checkTurn = () =>{
@@ -138,18 +140,64 @@ const loadImages = (player) => {
 
 const createMoveButtons = (player) => {
   const playerDisplay = document.querySelector(`.playerDisplays.` + player.name);
-  const moves = player.pokemonChoice.Move;
+  const moves = player.pokemonChoice.moves;
   console.log(moves);
 
   moves.forEach((move) =>{
     const button = document.createElement('button');
     button.value = move.name
-    button.textContent = move.name
+    button.textContent = move.name;
+    button.classList = "moveButtons"
+    button.addEventListener('mousedown', battleSet)
     console.log(button)
     playerDisplay.appendChild(button)
   });
 
 }
 
+// Need to add click listener that changes moveLoaded to true
+
+// Need to target move buttons in each player's area
+// Then need to apply the correct values to the moves
+
+const battleSet = (e) => {
+  if(player1.moveLoaded && player2.moveLoaded) return;
+  if (player1.turn === true){
+    player1.moveLoaded = e.target.value
+    console.log(` Player 1 chose: ${player1.moveLoaded}`)
+    checkTurn()
+  }
+  else if (player2.turn === true){
+    player2.moveLoaded = e.target.value;
+    console.log(` Player 2 chose: ${player2.moveLoaded}`)
+    checkTurn()
+  }
+  if (player1.moveLoaded && player2.moveLoaded){
+    console.log('Both moves loaded.')
+    //battleExecution()
+    loadMoveObjects(player1)
+    loadMoveObjects(player2)
+  }
+}
+
+const loadMoveObjects = (player) => {
+
+  const pokemonMoveSet = player.pokemonChoice.moves;
+
+  const selectedMove = pokemonMoveSet.filter(move => move.name === player.moveLoaded)
+   //need to use value to loop through moves, check for name equating to move
+  //then use the value of the moves to battle against one another 
+  console.log(selectedMove)
+  return selectedMove
+}
+
+const battleExecution = () =>{
+ 
+  //  change eval later to a safer method. 
+  // eval does not work with spaces in the name
+  
+
+}
 
 
+const gifToPngSprites = () =>{}
